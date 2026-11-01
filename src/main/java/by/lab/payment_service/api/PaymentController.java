@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.Map;
 
 @RestController
@@ -39,12 +40,11 @@ public class PaymentController {
                 : ResponseEntity.ok(p);
     }
 
-    /** Список сервисов и методов из Регистра (для оснастки). */
     @GetMapping("/services")
     public ResponseEntity<?> listServices() {
         return ResponseEntity.ok(service.listServices());
     }
-    
+
     @GetMapping("/info")
     public ResponseEntity<?> info() {
         return ResponseEntity.ok(Map.of(
@@ -52,6 +52,22 @@ public class PaymentController {
             "version", "1.0",
             "description", "Сервис оплаты методов прикладных сервисов",
             "status", "running"
+        ));
+    }
+
+    @GetMapping("/status")
+    public ResponseEntity<?> status() {
+        return ResponseEntity.ok(Map.of(
+            "status", "ok",
+            "service", "PaymentService"
+        ));
+    }
+
+    @GetMapping("/pricing")
+    public ResponseEntity<?> pricing() {
+        return ResponseEntity.ok(Map.of(
+            "currency", "RUB",
+            "note", "Цены берутся из Регистра"
         ));
     }
 }

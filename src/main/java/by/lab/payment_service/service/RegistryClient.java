@@ -21,14 +21,11 @@ public class RegistryClient {
     }
 
     public record CheckResult(boolean exists, String baseUrl, Double price) {}
-
     public record MethodInfo(String name, String httpMethod, String path,
                              String description, Double price) {}
-
     public record ServiceInfo(String name, String baseUrl, String description,
                               List<MethodInfo> methods) {}
 
-    // ===== Проверка метода в Регистре =====
     public CheckResult checkMethod(String serviceName, String methodName) {
         try {
             String url = registryUrl + "/api/services/" + serviceName
@@ -52,7 +49,6 @@ public class RegistryClient {
         }
     }
 
-    // ===== Список сервисов из Регистра (для оснастки) =====
     @SuppressWarnings("unchecked")
     public List<ServiceInfo> listServices() {
         try {
@@ -97,7 +93,6 @@ public class RegistryClient {
         }
     }
 
-    // ===== Отправка токена в прикладной сервис =====
     public boolean sendToken(String baseUrl, TokenNotification notif) {
         try {
             String url = baseUrl.replaceAll("/$", "") + "/internal/payment-token";
@@ -113,7 +108,6 @@ public class RegistryClient {
         }
     }
 
-    // ===== Утилиты разбора JSON =====
     private Double extractPrice(String json) {
         if (json == null) return null;
         int i = json.indexOf("\"price\"");

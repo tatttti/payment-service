@@ -29,7 +29,6 @@ public class Payment {
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
-
     @Column(precision = 12)
     private Double price;
 

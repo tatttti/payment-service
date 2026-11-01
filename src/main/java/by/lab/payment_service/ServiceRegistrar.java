@@ -29,7 +29,21 @@ public class ServiceRegistrar implements ApplicationRunner {
                 "baseUrl", myBaseUrl,
                 "description", "Сервис оплаты методов прикладных сервисов",
                 "methods", List.of(
-                    // Публичный платный метод — чтобы сервис был виден в регистре как товар
+                    Map.of(
+                        "name", "Pay",
+                        "httpMethod", "POST",
+                        "path", "/api/payment/pay",
+                        "description", "Оплатить доступ к методу прикладного сервиса",
+                        "paid", true,
+                        "price", 0.00,
+                        "parameters", List.of(
+                            Map.of("name", "firmId", "type", "string", "location", "body", "required", true),
+                            Map.of("name", "serviceName", "type", "string", "location", "body", "required", true),
+                            Map.of("name", "methodName", "type", "string", "location", "body", "required", true),
+                            Map.of("name", "dateFrom", "type", "string", "location", "body", "required", true),
+                            Map.of("name", "dateTo", "type", "string", "location", "body", "required", true)
+                        )
+                    ),
                     Map.of(
                         "name", "Info",
                         "httpMethod", "GET",
@@ -39,20 +53,23 @@ public class ServiceRegistrar implements ApplicationRunner {
                         "price", 0.00,
                         "parameters", List.of()
                     ),
-                    // Служебный скрытый метод — приём оплаты
                     Map.of(
-                        "name", "Pay",
-                        "httpMethod", "POST",
-                        "path", "/api/payment/pay",
-                        "description", "Оплатить доступ к методу прикладного сервиса",
-                        "paid", false,
-                        "parameters", List.of(
-                            Map.of("name", "firmId", "type", "string", "location", "body", "required", true),
-                            Map.of("name", "serviceName", "type", "string", "location", "body", "required", true),
-                            Map.of("name", "methodName", "type", "string", "location", "body", "required", true),
-                            Map.of("name", "dateFrom", "type", "string", "location", "body", "required", true),
-                            Map.of("name", "dateTo", "type", "string", "location", "body", "required", true)
-                        )
+                        "name", "Status",
+                        "httpMethod", "GET",
+                        "path", "/api/payment/status",
+                        "description", "Статус сервиса оплаты",
+                        "paid", true,
+                        "price", 0.00,
+                        "parameters", List.of()
+                    ),
+                    Map.of(
+                        "name", "Pricing",
+                        "httpMethod", "GET",
+                        "path", "/api/payment/pricing",
+                        "description", "Информация о валюте и ценах",
+                        "paid", true,
+                        "price", 0.00,
+                        "parameters", List.of()
                     )
                 )
             );
