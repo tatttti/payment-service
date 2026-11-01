@@ -43,4 +43,14 @@ public class PaymentController {
     public ResponseEntity<?> listServices() {
         return ResponseEntity.ok(service.listServices());
     }
+    
+    @GetMapping("/info")
+    public ResponseEntity<?> info() {
+        return ResponseEntity.ok(Map.of(
+            "service", "PaymentService",
+            "version", "1.0",
+            "description", "Сервис оплаты методов прикладных сервисов",
+            "status", "running"
+        ));
+    }
 }
