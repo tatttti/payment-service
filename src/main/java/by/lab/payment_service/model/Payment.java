@@ -29,7 +29,7 @@ public class Payment {
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
-    // ===== НОВОЕ: цена метода, взятого из Регистра =====
+
     @Column(precision = 12)
     private Double price;
 
